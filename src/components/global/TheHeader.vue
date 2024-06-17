@@ -41,7 +41,7 @@ import BasicIcon from '@/components/global/BasicIcon.vue';
       </button>
       <button class="group relative p-2 focus:outline-0">
         <basic-icon class="h-4 w-4" name="dotsVertical" />
-        <!--        <the-dropdown-settings />-->
+        <the-dropdown-settings />
       </button>
       <button-login />
     </div>
