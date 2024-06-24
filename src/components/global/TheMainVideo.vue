@@ -1,9 +1,15 @@
 <script setup>
 import VideoItem from '@/components/global/VideoItem.vue';
+import { computed } from 'vue';
+const props = defineProps({ isSidebarOpen: Boolean });
+
+const classes = computed(() => {
+  return [props.isSidebarOpen ? 'xl:ml-64' : 'md:ml-24', 'px-5', 'pb-5', 'pt-32'];
+});
 </script>
 
 <template>
-  <main class="px-5 pb-5 pt-32 md:ml-24 xl:ml-64">
+  <main :class="classes">
     <div
       class="m-auto grid max-w-screen-2xl gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
     >

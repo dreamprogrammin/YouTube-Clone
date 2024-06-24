@@ -5,6 +5,10 @@ import LogoMain from '@/components/LogoMain.vue';
 import TheSearch from '@/components/global/TheSearch.vue';
 import ButtonLogin from '@/components/global/ButtonLogin.vue';
 import BasicIcon from '@/components/global/BasicIcon.vue';
+
+defineEmits({
+  toggleSidebar: null
+});
 </script>
 
 <template>
@@ -12,7 +16,7 @@ import BasicIcon from '@/components/global/BasicIcon.vue';
     <!-- Начало -->
     <div class="flex lg:w-1/4">
       <div class="flex items-center pl-4 xl:w-64 xl:bg-white">
-        <button class="mr-3 focus:outline-none sm:ml-2 sm:mr-6">
+        <button @click="$emit('toggleSidebar')" class="mr-3 focus:outline-none sm:ml-2 sm:mr-6">
           <basic-icon name="menu" />
         </button>
         <logo-main />

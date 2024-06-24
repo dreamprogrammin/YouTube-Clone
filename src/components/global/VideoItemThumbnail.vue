@@ -2,7 +2,7 @@
 import BasicIcon from '@/components/global/BasicIcon.vue';
 
 const props = defineProps({
-  index: String
+  index: Number
 });
 </script>
 

@@ -1,7 +1,37 @@
-<script setup></script>
+<script>
+export default {
+  props: {
+    isOpen: Boolean
+  },
+  computed: {
+    classes() {
+      console.log(this.isOpen);
+      return ['fixed', 'z-20', 'min-h-screen', 'overflow-auto', 'bg-white', 'pt-14'];
+    }
+  }
+};
+
+// import { computed } from 'vue';
+//
+// const { isOpen } = defineProps({ isOpen: Boolean });
+// console.log(isOpen);
+// const classes = computed(() => {
+//   console.log(isOpen);
+//   return [
+//     isOpen ? 'md:block' : 'hidden',
+//     'fixed',
+//     'z-20',
+//     'min-h-screen',
+//     'overflow-auto',
+//     'bg-white',
+//     'pt-14'
+//   ];
+// });
+</script>
 
 <template>
-  <aside class="fixed z-20 hidden min-h-screen overflow-auto bg-white pt-14 md:block xl:hidden">
+  <!-- The mini Sidebar-->
+  <aside :class="classes">
     <section>
       <ul>
         <li>
