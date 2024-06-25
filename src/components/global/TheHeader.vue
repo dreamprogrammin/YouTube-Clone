@@ -39,14 +39,8 @@ defineEmits({
       <button class="p-2 focus:outline-none sm:hidden">
         <basic-icon name="search" class="h-4 w-4" />
       </button>
-      <button class="group relative p-2 focus:outline-0">
-        <basic-icon class="h-4 w-4" name="grid" />
-        <TheDropdownApps />
-      </button>
-      <button class="group relative p-2 focus:outline-0">
-        <basic-icon class="h-4 w-4" name="dotsVertical" />
-        <the-dropdown-settings />
-      </button>
+      <TheDropdownApps />
+      <the-dropdown-settings />
       <button-login />
     </div>
   </header>
