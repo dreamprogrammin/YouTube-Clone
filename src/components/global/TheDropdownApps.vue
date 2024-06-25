@@ -4,12 +4,14 @@ import BasicIcon from '@/components/global/BasicIcon.vue';
 import { onMounted, ref } from 'vue';
 
 const isOpen = ref(false);
+const dropdown = ref(document.querySelector('.dropdown'));
 
 onMounted(() => {
   window.addEventListener('click', (event) => {
     if (!document.querySelector('.relative').contains(event.target)) {
       isOpen.value = false;
     }
+    dropdown.value.focus();
   });
 });
 </script>
@@ -28,8 +30,11 @@ onMounted(() => {
       leave-to-class="transform opacity-0 scale-95"
     >
       <div
+        ref="dropdown"
+        tabindex="-1"
+        @keydown.esc="isOpen = !isOpen"
         v-show="isOpen"
-        class="absolute -right-full right-0 top-9 w-60 border border-t-0 bg-white sm:left-0 sm:right-0"
+        class="absolute -right-full right-0 top-9 w-60 border border-t-0 bg-white focus:outline-none sm:left-0 sm:right-0"
       >
         <section class="border-b py-2">
           <ul>

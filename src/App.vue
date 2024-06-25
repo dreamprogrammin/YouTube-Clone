@@ -40,14 +40,6 @@ const isMobileSidebar = ref(false);
 const isSidebarOpen = ref(false);
 
 onMounted(() => {
-  if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-    isCompactSidebarOpenActive.value = true;
-  }
-
-  if (window.innerWidth > 1280) {
-    isCompactSidebarOpenActive.value = false;
-  }
-
   onResize();
 
   window.addEventListener('resize', onResize);
@@ -73,6 +65,7 @@ const onResize = () => {
   } else {
     isCompactSidebarOpen.value = isCompactSidebarOpenActive.value;
     isSidebarOpen.value = !isCompactSidebarOpenActive.value;
+    isMobileSidebar.value = false;
   }
 };
 const openMobileSidebar = () => (isMobileSidebar.value = true);

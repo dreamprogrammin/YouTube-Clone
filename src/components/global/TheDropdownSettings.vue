@@ -15,12 +15,14 @@ const listItems = reactive([
 ]);
 
 const isOpen = ref(false);
+const dropdown = ref(document.querySelector('.dropdown'));
 
 onMounted(() => {
   window.addEventListener('click', (event) => {
     if (document.querySelector('.relative').contains(event.target)) {
       isOpen.value = false;
     }
+    dropdown.value.focus();
   });
 });
 </script>
@@ -38,7 +40,13 @@ onMounted(() => {
       leave-from-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95"
     >
-      <div v-show="isOpen" class="absolute right-0 top-9 w-72 border border-t-0 bg-white">
+      <div
+        ref="dropdown"
+        @keydown.esc="isOpen = false"
+        v-show="isOpen"
+        tabindex="-1"
+        class="absolute right-0 top-9 w-72 border border-t-0 bg-white focus:outline-none"
+      >
         <section class="border-b py-2">
           <ul>
             <dropdown-settings-list-item

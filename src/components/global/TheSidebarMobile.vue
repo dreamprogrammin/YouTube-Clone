@@ -3,17 +3,19 @@ import TheSidebarContent from '@/components/global/TheSidebarContent.vue';
 import LogoMain from '@/components/LogoMain.vue';
 import BasicIcon from '@/components/global/BasicIcon.vue';
 import TheSidebarMobileOverlay from '@/components/global/TheSidebarMobileOverlay.vue';
+import { onMounted, ref } from 'vue';
 
 const { isOpen } = defineProps({
   isOpen: Boolean
 });
+const mobileSidebar = ref(document.querySelector('.mobileSidebar'));
 defineEmits({ closeMobileSidebar: null });
 
-// watch(isOpen, () => {
-//   if (isOpen) {
-//     this.$refs.mobileSidebar.focus();
-//   }
-// });
+onMounted(() => {
+  window.addEventListener('click', () => {
+    mobileSidebar.value.focus();
+  });
+});
 </script>
 
 <template>
