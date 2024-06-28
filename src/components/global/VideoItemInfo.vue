@@ -1,6 +1,7 @@
 <script setup>
 import BasicIcon from '@/components/global/BasicIcon.vue';
 import { computed } from 'vue';
+import VideoItemDropdown from '@/components/global/VideoItemDropdown.vue';
 
 const props = defineProps({
   index: Number
@@ -28,11 +29,7 @@ const summory = computed(
       </div>
       <div v-html="summory"></div>
     </div>
-    <button
-      class="-mt-1 ml-auto pl-1 text-gray-800 opacity-0 hover:text-gray-600 group-hover:opacity-100"
-    >
-      <basic-icon class="h-5 w-5" name="dotsVertical" />
-    </button>
+    <video-item-dropdown />
   </div>
 </template>
 

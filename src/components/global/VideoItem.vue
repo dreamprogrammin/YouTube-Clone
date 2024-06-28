@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <a href="#" class="group mb-7">
+  <a class="group mb-7">
     <video-item-thumbnail :index="props.index" />
     <video-item-info :index="props.index" />
   </a>
