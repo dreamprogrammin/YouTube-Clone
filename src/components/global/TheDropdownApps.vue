@@ -1,14 +1,29 @@
 <script setup>
 import DropdownAppsListItem from '@/components/global/DropdownAppsListItem.vue';
 import BasicIcon from '@/components/global/BasicIcon.vue';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const isOpen = ref(false);
 const dropdown = ref(document.querySelector('.dropdown'));
 
+const classes = computed(() => [
+  'absolute',
+  ' -right-full',
+  'right-0',
+  'top-9',
+  'z-10',
+  'w-60',
+  'border',
+  'border-t-0',
+  'bg-white',
+  'focus:outline-none',
+  'sm:left-0',
+  'sm:right-0'
+]);
+
 onMounted(() => {
   window.addEventListener('click', (event) => {
-    if (!document.querySelector('.relative').contains(event.target)) {
+    if (document.querySelector('.relative').contains(event.target)) {
       isOpen.value = false;
     }
     dropdown.value.focus();
@@ -34,7 +49,7 @@ onMounted(() => {
         tabindex="-1"
         @keydown.esc="isOpen = !isOpen"
         v-show="isOpen"
-        class="absolute -right-full right-0 top-9 w-60 border border-t-0 bg-white focus:outline-none sm:left-0 sm:right-0"
+        :class="classes"
       >
         <section class="border-b py-2">
           <ul>

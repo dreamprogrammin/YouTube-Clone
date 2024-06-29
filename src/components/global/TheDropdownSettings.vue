@@ -1,6 +1,6 @@
 <script setup>
 import DropdownSettingsListItem from '@/components/global/DropdownSettingsListItem.vue';
-import { onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import BasicIcon from '@/components/global/BasicIcon.vue';
 
 const listItems = reactive([
@@ -16,6 +16,17 @@ const listItems = reactive([
 
 const isOpen = ref(false);
 const dropdown = ref(document.querySelector('.dropdown'));
+
+const classes = computed(() => [
+  'absolute',
+  'right-0',
+  'top-9',
+  'w-72 ',
+  'border',
+  'border-t-0',
+  'bg-white',
+  'focus:outline-none'
+]);
 
 onMounted(() => {
   window.addEventListener('click', (event) => {
@@ -45,7 +56,7 @@ onMounted(() => {
         @keydown.esc="isOpen = false"
         v-show="isOpen"
         tabindex="-1"
-        class="absolute right-0 top-9 w-72 border border-t-0 bg-white focus:outline-none"
+        :class="classes"
       >
         <section class="border-b py-2">
           <ul>
