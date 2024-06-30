@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import CategoryItem from '@/components/global/CategoryItem.vue';
 
-const props = defineProps({ isSidebarOpen: Boolean });
+const { isSidebarOpen } = defineProps({ isSidebarOpen: Boolean });
 
 const categories = ref([
   'All',
@@ -25,21 +25,13 @@ const categories = ref([
 ]);
 
 const classes = computed(() => {
-  return [
-    props.isSidebarOpen ? 'xl:pl-64' : 'md:pl-24',
-    'fixed',
-    'z-10',
-    'w-full',
-    'bg-white',
-    'bg-opacity-95',
-    'pt-14'
-  ];
+  return isSidebarOpen ? 'xl:pl-64' : 'md:pl-24';
 });
 </script>
 
 <template>
   <section :class="classes">
-    <div class="m-auto max-w-screen-2xl border-b border-t px-4">
+    <div class="m-auto max-w-screen-2xl border-b border-t bg-white bg-opacity-95 px-4">
       <div class="flex space-x-3 overflow-auto whitespace-nowrap py-3 text-xs">
         <category-item
           v-for="category in categories"

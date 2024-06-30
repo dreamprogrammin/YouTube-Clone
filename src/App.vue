@@ -1,37 +1,4 @@
 <script setup>
-// export default {
-//   data() {
-//     return {
-//       isMobileSidebar: false,
-//       sidebarState: null
-//     };
-//   },
-//   mounted() {
-//     if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-//       this.sidebarState = 'compact';
-//       console.log(this.sidebarState);
-//     }
-//     if (window.innerWidth > 1280) {
-//       this.sidebarState = 'normal';
-//       console.log(this.sidebarState);
-//     }
-//   },
-//   methods: {
-//     openMobileSidebar() {
-//       this.isMobileSidebar = true;
-//     },
-//     closeMobileSidebar() {
-//       this.isMobileSidebar = false;
-//     },
-//     toggleSidebar() {
-//       if (window.innerWidth >= 1280) {
-//         this.sidebarState = this.sidebarState === 'normal' ? 'compact' : 'normal';
-//       } else {
-//         this.openMobileSidebar();
-//       }
-//     }
-//   }
-// };
 import TheSidebarCompact from '@/components/global/TheSidebarCompact.vue';
 import { ref, onMounted } from 'vue';
 const isCompactSidebarOpenActive = ref(false);
@@ -73,11 +40,13 @@ const closeMobileSidebar = () => (isMobileSidebar.value = false);
 </script>
 
 <template>
-  <the-header @toggle-sidebar="toggleSidebar" />
+  <div class="fixed z-30 w-full">
+    <the-header @toggle-sidebar="toggleSidebar" />
+    <the-category :is-sidebar-open="isSidebarOpen" />
+  </div>
   <the-sidebar-compact v-if="isCompactSidebarOpen" />
   <the-sidebar v-if="isSidebarOpen" />
   <the-sidebar-mobile :is-open="isMobileSidebar" @close-mobile-sidebar="closeMobileSidebar" />
-  <the-category :is-sidebar-open="isSidebarOpen" />
   <the-main-video :is-sidebar-open="isSidebarOpen" />
   <!--  <Channel />-->
 </template>

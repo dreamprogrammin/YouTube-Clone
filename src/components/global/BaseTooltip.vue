@@ -3,9 +3,11 @@ import { computed, ref } from 'vue';
 
 const isShown = ref(false);
 
-const { text, top } = defineProps({
+const { text, top, left, right } = defineProps({
   text: String,
-  top: Boolean
+  top: Boolean,
+  left: Boolean,
+  right: Boolean
 });
 
 const classes = computed(() => {
@@ -18,12 +20,24 @@ const classes = computed(() => {
     'whitespace-nowrap',
     'p-2',
     'absolute',
-    'left-1/2',
     'transform',
-    '-translate-x-1/2',
-    top ? 'bottom-12' : 'top-14'
+    ...getPositionClasses()
   ];
 });
+
+const getPositionClasses = () => {
+  const topClass = top ? 'bottom-12' : 'top-14';
+
+  if (right) {
+    return [topClass, 'left-0'];
+  }
+
+  if (left) {
+    return [topClass, 'right-0'];
+  }
+
+  return [topClass, '-translate-x-1/2', 'left-1/2'];
+};
 </script>
 
 <template>
