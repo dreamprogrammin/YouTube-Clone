@@ -1,41 +1,47 @@
-<script setup>
-import DropdownSettingsListItem from '@/components/global/DropdownSettingsListItem.vue';
-import { computed, onMounted, reactive, ref } from 'vue';
+<script>
 import BasicIcon from '@/components/global/BasicIcon.vue';
-
-const listItems = reactive([
-  { label: 'Appearance: Device theme', icon: 'sun', withSubMenu: true },
-  { label: 'Language: English', icon: 'language', withSubMenu: true },
-  { label: 'Location: United States', icon: 'location', withSubMenu: true },
-  { label: 'Setting', icon: 'setting', withSubMenu: false },
-  { label: 'Your data in Youtube', icon: 'shield', withSubMenu: false },
-  { label: 'Help', icon: 'question', withSubMenu: false },
-  { label: 'Keyboard shortcuts', icon: 'calculate', withSubMenu: false },
-  { label: 'Restricted Mode: off', icon: null, withSubMenu: true }
-]);
-
-const isOpen = ref(false);
-const dropdown = ref(document.querySelector('.dropdown'));
-
-const classes = computed(() => [
-  'absolute',
-  'right-0',
-  'top-9',
-  'w-72 ',
-  'border',
-  'border-t-0',
-  'bg-white',
-  'focus:outline-none'
-]);
-
-onMounted(() => {
-  window.addEventListener('click', (event) => {
-    if (document.querySelector('.relative').contains(event.target)) {
-      isOpen.value = false;
+import TheDropdownSettingsMain from '@/components/global/TheDropdownSettingsMain.vue';
+import TheDropdownSettingsAppearance from '@/components/global/TheDropdownSettingsAppearance.vue';
+export default {
+  components: {
+    BasicIcon,
+    TheDropdownSettingsAppearance,
+    TheDropdownSettingsMain
+  },
+  data() {
+    return {
+      selectedMenu: 'main',
+      isOpen: false,
+      dropdownClasses: [
+        'absolute',
+        'right-0',
+        'top-9',
+        'w-72 ',
+        'border',
+        'border-t-0',
+        'bg-white',
+        'focus:outline-none'
+      ]
+    };
+  },
+  watch: {
+    isOpen() {
+      this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus());
     }
-    dropdown.value.focus();
-  });
-});
+  },
+  mounted() {
+    window.addEventListener('click', (event) => {
+      if (!this.$el.contains(event.target)) {
+        this.isOpen = false;
+      }
+    });
+  },
+  methods: {
+    showSelectMenu(selectedMenu) {
+      this.selectedMenu = selectedMenu;
+    }
+  }
+};
 </script>
 
 <template>
@@ -56,28 +62,12 @@ onMounted(() => {
         @keydown.esc="isOpen = false"
         v-show="isOpen"
         tabindex="-1"
-        :class="classes"
+        :class="dropdownClasses"
       >
-        <section class="border-b py-2">
-          <ul>
-            <dropdown-settings-list-item
-              v-for="listItem in listItems.slice(0, 7)"
-              :key="listItem"
-              :label="listItem.label"
-              :icon="listItem.icon"
-              :withSubMenu="listItem.withSubMenu"
-            />
-          </ul>
-        </section>
-        <section class="py-2">
-          <ul>
-            <dropdown-settings-list-item
-              :label="listItems[7].label"
-              :with-sub-menu="listItems[7].withSubMenu"
-            />
-          </ul>
-        </section></div
-    ></transition>
+        <the-dropdown-settings-main v-if="selectedMenu === 'main'" @select-menu="showSelectMenu" />
+        <the-dropdown-settings-appearance v-else-if="selectedMenu === 'appearance'" />
+      </div>
+    </transition>
   </div>
 </template>
 

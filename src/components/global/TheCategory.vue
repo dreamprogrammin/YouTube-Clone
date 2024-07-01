@@ -25,7 +25,7 @@ const categories = ref([
 ]);
 
 const classes = computed(() => {
-  return isSidebarOpen ? 'xl:pl-64' : 'md:pl-24';
+  return isSidebarOpen ? 'xl:pl-64' : 'md:pl-14';
 });
 </script>
 
